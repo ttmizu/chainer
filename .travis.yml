@@ -51,6 +51,7 @@ install:
   - python setup.py sdist
   - pip install dist/*.tar.gz
   - pip install h5py
+  - travis_wait pip install theano
   - pip install nose hacking mock
   - pip install autopep8
 
@@ -68,4 +69,8 @@ sudo: false
 addons:
   apt:
     packages:
+      - gfortran
+      - libatlas-dev
+      - libblas-dev
       - libhdf5-serial-dev
+      - liblapack-dev
