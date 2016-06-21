@@ -50,7 +50,6 @@ install:
   - pip install cython
   - python setup.py sdist
   - pip install dist/*.tar.gz
-  - pip install h5py
   - pip install nose hacking mock
 
 script:
@@ -58,8 +57,3 @@ script:
   - PYTHONWARNINGS='module::DeprecationWarning' nosetests -a '!gpu' --with-doctest tests/install_tests
 
 sudo: false
-
-addons:
-  apt:
-    packages:
-      - libhdf5-serial-dev
