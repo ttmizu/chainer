@@ -49,6 +49,10 @@ cpdef enum:
     eventDisableTiming = 2
     eventInterprocess = 4
 
+    cudaMemAttachGlobal = 1
+    cudaMemAttachHost = 2
+    cudaMemAttachSingle = 4
+
 
 ###############################################################################
 # Initialization
@@ -76,6 +80,7 @@ cpdef deviceEnablePeerAccess(int peerDevice)
 ###############################################################################
 
 cpdef size_t malloc(size_t size) except *
+cpdef size_t mallocManaged(size_t size, unsigned int flags=*) except *
 cpdef free(size_t ptr)
 cpdef memGetInfo()
 cpdef memcpy(size_t dst, size_t src, size_t size, int kind)

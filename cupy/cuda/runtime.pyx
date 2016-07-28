@@ -56,6 +56,7 @@ cdef extern from "cupy_cuda.h":
 
     # Memory management
     int cudaMalloc(void** devPtr, size_t size) nogil
+    int cudaMallocManaged(void** devPtr, size_t size, unsigned int flags) nogil
     int cudaFree(void* devPtr) nogil
     int cudaMemGetInfo(size_t* free, size_t* total) nogil
     int cudaMemcpy(void* dst, const void* src, size_t count,
@@ -178,6 +179,15 @@ cpdef size_t malloc(size_t size) except *:
     cdef void* ptr
     with nogil:
         status = cudaMalloc(&ptr, size)
+    check_status(status)
+    return <size_t>ptr
+
+
+cpdef size_t mallocManaged(size_t size,
+                           unsigned int flags=cudaMemAttachGlobal) except *:
+    cdef void* ptr
+    with nogil:
+        status = cudaMallocManaged(&ptr, size, flags)
     check_status(status)
     return <size_t>ptr
 
